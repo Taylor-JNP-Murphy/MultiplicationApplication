@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 
 namespace MultiplicationApplication;
 
@@ -13,13 +14,13 @@ public class MainProgram
             string AppName = "-*-MultiplicationMadness-*-";
             string[] Incorrect = ["Unlucky, you can do the next one!", "Don't be too down, you got this!", "Worry not, practice makes perfect!", "Incorrect, don't worry though, you can get the next one!"];
             string[] Correct = ["Great Job!", "Keep up the good work!", "Spectacular Work!", "Amazing work , keep it up!"];
+            string InvalidInput = "Please enter a valid number between 1 and 100";
             
             // Random Number Generator for Array messages
             Random randomNumberOne = new Random();
-            int randomString = randomNumberOne.Next(-1, 5);
+            
 
             Console.WriteLine(AppName);
-            // Console.WriteLine(Incorrect[randomString]);
 
             // Game Boolean
             bool ApplicationRunning = true;
@@ -45,6 +46,8 @@ public class MainProgram
                         int NumOne = randomNumberOne.Next(1, 11);
                         int NumTwo = randomNumberOne.Next(1, 11);
 
+                        int rndString = randomNumberOne.Next(0, 4);
+
                         // Answer definition
                         int Answer = NumOne * NumTwo;
 
@@ -60,15 +63,33 @@ public class MainProgram
                         Console.WriteLine(Question);
 
                         // User Input
-                        int UserAnswer = Convert.ToInt32(Console.ReadLine());
+
+                        int UserAnswer;
+
+                        while (true)
+                        {
+                            try
+                            {
+                                UserAnswer = Convert.ToInt32(Console.ReadLine());
+                                if (UserAnswer < 0 || UserAnswer > 100)
+                                {
+                                    Console.WriteLine(InvalidInput);
+                                }
+                                break;
+                            }
+                            catch (FormatException)
+                            {
+                                Console.WriteLine(InvalidInput);
+                            }
+                        }
 
                         if (UserAnswer != Answer)
                         {
-                            Console.WriteLine(Incorrect[randomString]);
+                            Console.WriteLine(Incorrect[rndString]);
                         }
                         else if (UserAnswer == Answer)
                         {
-                            Console.WriteLine(Correct[randomString]);
+                            Console.WriteLine(Correct[rndString]);
                             Score++;
                         }
                         i++;
@@ -86,10 +107,11 @@ public class MainProgram
                 {
                     Console.WriteLine("Incorrect data entry, please enter Y or N.");
                 }
+                ApplicationRunning = false;
             }
-            Thread.Sleep(1000);
+            
+            Thread.Sleep(3500);
             Console.Clear();
-            ApplicationRunning = false;
             Environment.Exit(0);
         }
     }
