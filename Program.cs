@@ -9,53 +9,47 @@ public class MainProgram
     {
         public static void Main(string[] args)
         {
-            // Variable definitions
+            // String ~ Array definitions
             string StartMessage = "Lets begin the Multiplication MADNESS!!";
             string AppName = "-*-MultiplicationMadness-*-";
             string[] Incorrect = ["Unlucky, you can do the next one!", "Don't be too down, you got this!", "Worry not, practice makes perfect!", "Incorrect, don't worry though, you can get the next one!"];
             string[] Correct = ["Great Job!", "Keep up the good work!", "Spectacular Work!", "Amazing work , keep it up!"];
             string InvalidInput = "Please enter a valid number between 1 and 100";
             
-            // Random Number Generator for Array messages
-            Random randomNumberOne = new Random();
-            
-            // Application Name output
-            Console.WriteLine(AppName);
 
-            // Game Boolean
-            bool ApplicationRunning = true;
+            Random randomNumberOne = new Random(); // Random Number Generator for Array messages
 
-            while (ApplicationRunning)
+            Console.WriteLine(AppName); // Application Name output
+
+            bool ApplicationRunning = true; // Game Boolean
+
+            while (ApplicationRunning) // Loop start ~ Game functionality
             {
                 Console.WriteLine("Do you want to start the game? (Y/N)"); // User instruction
-                // User input Y or N
-                string UserDecision = Console.ReadLine();
-                // Trims any white space between characters ~ before and after the string
-                UserDecision = UserDecision.Trim();
-                
+                string UserDecision = Console.ReadLine(); // User input Y or N
+                UserDecision = UserDecision.Trim(); // Trims any white space between characters ~ before and after the string
+
                 // Checks User decision statement
                 if (UserDecision.ToUpper() == "Y")
                 {
-                    // Start Message with basic instruction
-                    Console.WriteLine(StartMessage);
+                    
+                    Console.WriteLine(StartMessage); // Start Message with welcome message
                     Thread.Sleep(1500); // Console sleeps for 1.5 seconds
 
-                    // Incremental Number Variable
-                    int i = 0;
-                    int Score = 0;
+                    int i = 0; // loop variable for questions
+                    int Score = 0; // score variable
 
                     // Game while loop
                     while (i < 10)
                     {
-                        // Rnd Number variable
+                        // Rnd Number variables
                         int NumOne = randomNumberOne.Next(1, 11);
                         int NumTwo = randomNumberOne.Next(1, 11);
 
-                        // Random string variable
-                        int rndString = randomNumberOne.Next(0, 4);
+                        
+                        int rndString = randomNumberOne.Next(0, 4); // Random string variable
 
-                        // Answer definition
-                        int Answer = NumOne * NumTwo;
+                        int Answer = NumOne * NumTwo; // Answer definition
 
                         Thread.Sleep(10); // Console stops for .01 seconds
                         Console.Clear(); // Clears previous outputs
@@ -102,8 +96,8 @@ public class MainProgram
                         Thread.Sleep(1000); // console pauses for 1 second
                         Console.Clear(); // clears previous outputs to console
                     }
-                    // Outputs Final score after all questions have been answer
-                    Console.WriteLine($"Well Done! You got {Score}/{i} correct!");
+                    
+                    Console.WriteLine($"Well Done! You got {Score}/{i} correct!"); // Outputs Final score after all questions have been answer
 
                 }
                 else if(UserDecision.ToUpper() == "N") // User decision will close the application if N is chosen at the beginning
