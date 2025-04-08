@@ -108,9 +108,8 @@ public class MainProgram
                 ApplicationRunning = false; // Closes the loop
             }
             // Provides 2.5 seconds before closing the console.
-            Thread.Sleep(2500);
+            Console.ReadLine();
             Console.Clear();
-            Environment.Exit(0);
         }
     }
 }
