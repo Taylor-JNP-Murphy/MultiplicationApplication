@@ -109,7 +109,7 @@ public class MainProgram
             }
             // Provides 2.5 seconds before closing the console.
             Console.ReadLine();
-            Console.Clear();
+            Console.Clear(); 
         }
     }
 }
