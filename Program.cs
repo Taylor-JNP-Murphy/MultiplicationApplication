@@ -10,11 +10,11 @@ public class MainProgram
         public static void Main(string[] args)
         {
             // Variable definitions
-            string StartMessage = "Welcome!";
-            string AppName = "-*-MultiplicationMadness-*-";
-            string[] Incorrect = ["Unlucky, you can do the next one!", "Don't be too down, you got this!", "Worry not, practice makes perfect!", "Incorrect, don't worry though, you can get the next one!"];
-            string[] Correct = ["Great Job!", "Keep up the good work!", "Spectacular Work!", "Amazing work , keep it up!"];
-            string InvalidInput = "Please enter a valid number between 1 and 100";
+            string StartMessage = " Lets begin the Multiplication MADNESS!!";
+            string AppName = " -*-MultiplicationMadness-*-";
+            string[] Incorrect = [" Unlucky, you can do the next one!", " Don't be too down, you got this!", " Worry not, practice makes perfect!", " Incorrect, don't worry though, you can get the next one!"];
+            string[] Correct = [" Great Job!", " Keep up the good work!", " Spectacular Work!", " Amazing work , keep it up!"];
+            string InvalidInput = " Please enter a valid number between 1 and 100";
             
             // Random Number Generator for Array messages
             Random randomNumberOne = new Random();
@@ -27,14 +27,14 @@ public class MainProgram
 
             while (ApplicationRunning)
             {
-                Console.WriteLine("Do you want to start the game? (Y/N)");
+                Console.WriteLine(" Do you want to start the game? (Y/N)");
                 string UserDecision = Console.ReadLine();
                 
                 if (UserDecision.ToUpper() == "Y")
                 {
                     // Start Message with basic instruction
                     Console.WriteLine(StartMessage);
-                    Thread.Sleep(300);
+                    Thread.Sleep(1500);
 
                     // Incremental Number Variable
                     int i = 0;
@@ -55,15 +55,14 @@ public class MainProgram
                         Console.Clear();
 
                         // Score Keeper
-                        Console.WriteLine($"Current score: {Score}");
+                        Console.WriteLine($" Current score: {Score}");
                         // Question definition
-                        string Question = $"What is {NumOne} x {NumTwo}?";
+                        string Question = $" What is {NumOne} x {NumTwo}?";
 
                         // Printing to console
                         Console.WriteLine(Question);
 
                         // User Input
-
                         int UserAnswer;
 
                         while (true)
@@ -96,7 +95,7 @@ public class MainProgram
                         Thread.Sleep(1000);
                         Console.Clear();
                     }
-                    Console.WriteLine($"Well Done! You got {Score}/{i} correct!");
+                    Console.WriteLine($" Well Done! You got {Score}/{i} correct!");
 
                 }
                 else if(UserDecision.ToUpper() == "N")
@@ -105,12 +104,12 @@ public class MainProgram
                     ApplicationRunning = false;
                 } else
                 {
-                    Console.WriteLine("Incorrect data entry, please enter Y or N.");
+                    Console.WriteLine(" Please enter Y or N as your decision.");
                 }
                 ApplicationRunning = false;
             }
             
-            Thread.Sleep(3500);
+            Thread.Sleep(2500);
             Console.Clear();
             Environment.Exit(0);
         }
