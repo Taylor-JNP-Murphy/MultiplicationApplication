@@ -15,7 +15,6 @@ public class MainProgram
             string[] Incorrect = ["Unlucky, you can do the next one!", "Don't be too down, you got this!", "Worry not, practice makes perfect!", "Incorrect, don't worry though, you can get the next one!"];
             string[] Correct = ["Great Job!", "Keep up the good work!", "Spectacular Work!", "Amazing work , keep it up!"];
             string InvalidInput = "Please enter a valid number between 1 and 100";
-            
 
             Random randomNumberOne = new Random(); // Random Number Generator for Array messages
 
@@ -32,13 +31,12 @@ public class MainProgram
                 // Checks User decision statement
                 if (UserDecision.ToUpper() == "Y")
                 {
-                    
                     Console.WriteLine(StartMessage); // Start Message with welcome message
                     Thread.Sleep(1500); // Console sleeps for 1.5 seconds
 
                     int i = 0; // loop variable for questions
                     int Score = 0; // score variable
-
+                    
                     // Game while loop
                     while (i < 10)
                     {
@@ -46,7 +44,6 @@ public class MainProgram
                         int NumOne = randomNumberOne.Next(1, 11);
                         int NumTwo = randomNumberOne.Next(1, 11);
 
-                        
                         int rndString = randomNumberOne.Next(0, 4); // Random string variable
 
                         int Answer = NumOne * NumTwo; // Answer definition
@@ -98,7 +95,6 @@ public class MainProgram
                     }
                     
                     Console.WriteLine($"Well Done! You got {Score}/{i} correct!"); // Outputs Final score after all questions have been answer
-
                 }
                 else if(UserDecision.ToUpper() == "N") // User decision will close the application if N is chosen at the beginning
                 {
