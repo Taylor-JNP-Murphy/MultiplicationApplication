@@ -1,7 +1,4 @@
-﻿using System;
-using System.Security.Cryptography.X509Certificates;
-
-namespace MultiplicationApplication;
+﻿namespace MultiplicationApplication;
 
 public class MainProgram
 {
@@ -12,8 +9,8 @@ public class MainProgram
             // String ~ Array definitions
             string StartMessage = "Lets begin the Multiplication MADNESS!!";
             string AppName = "-*-MultiplicationMadness-*-";
-            string[] Incorrect = ["Unlucky, you can do the next one!", "Don't be too down, you got this!", "Worry not, practice makes perfect!", "Incorrect, don't worry though, you can get the next one!"];
-            string[] Correct = ["Great Job!", "Keep up the good work!", "Spectacular Work!", "Amazing work , keep it up!"];
+            string[] Incorrect = { "Unlucky, you can do the next one!", "Don't be too down, you got this!", "Worry not, practice makes perfect!", "Incorrect, don't worry though, you can get the next one!" };
+            string[] Correct = {"Great Job!", "Keep up the good work!", "Spectacular Work!", "Amazing work , keep it up!"};
             string InvalidInput = "Please enter a valid number between 1 and 100";
 
             Random randomNumberOne = new Random(); // Random Number Generator for Array messages
@@ -24,92 +21,101 @@ public class MainProgram
 
             while (ApplicationRunning) // Loop start ~ Game functionality
             {
-                Console.WriteLine("Do you want to start the game? (Y/N)"); // User instruction
-                string UserDecision = Console.ReadLine(); // User input Y or N
-                UserDecision = UserDecision.Trim(); // Trims any white space between characters ~ before and after the string
-
-                // Checks User decision statement
-                if (UserDecision.ToUpper() == "Y")
+                bool userDecisionLoop = true; // Loops start menu to get the correct input
+                while (userDecisionLoop) // User input loop
                 {
-                    Console.WriteLine(StartMessage); // Start Message with welcome message
-                    Thread.Sleep(1500); // Console sleeps for 1.5 seconds
+                    Console.WriteLine("Do you want to start the game? (Y/N)"); // User instruction
+                    string UserDecision = Console.ReadLine().ToUpper(); // User input Y or N
+                    // UserDecision = UserDecision.Trim(); // Trims any white space between characters ~ before and after the string
 
-                    int i = 0; // loop variable for questions
-                    int Score = 0; // score variable
-                    
-                    // Game while loop
-                    while (i < 10)
+                    if (UserDecision == "Y") // Checks user decision
                     {
-                        // Rnd Number variables
-                        int NumOne = randomNumberOne.Next(1, 11);
-                        int NumTwo = randomNumberOne.Next(1, 11);
+                        userDecisionLoop = false; // breaks current loop
+                    }
+                    else if (UserDecision == "N")
+                    {
+                        ApplicationRunning = false; // Exits outer loop
+                        userDecisionLoop = false; // Exits this loop
+                    }
+                    else // outputs incorrect statement, prompt user again
+                    {
+                        Console.WriteLine("Invalid input. Please enter 'Y' or 'N'.");
+                    }
+                }
+                if (!ApplicationRunning) // checks if the applicationRunning is false
+                {
+                    break; // breaks loop
+                }
+                Console.WriteLine(StartMessage); // Start Message with welcome message
+                Thread.Sleep(1500); // Console sleeps for 1.5 seconds
 
-                        int rndString = randomNumberOne.Next(0, 4); // Random string variable
+                int i = 0; // loop variable for questions
+                int Score = 0; // score variable 
+                               // Game while loop
+                while (i < 10)
+                {
+                    // Rnd Number variables
+                    int NumOne = randomNumberOne.Next(1, 11);
+                    int NumTwo = randomNumberOne.Next(1, 11);
 
-                        int Answer = NumOne * NumTwo; // Answer definition
+                    int rndString = randomNumberOne.Next(0, 4); // Random string variable
 
-                        Thread.Sleep(10); // Console stops for .01 seconds
-                        Console.Clear(); // Clears previous outputs
+                    int Answer = NumOne * NumTwo; // Answer definition
 
-                        // Score Keeper
-                        Console.WriteLine($"Current score: {Score}");
-                        // Question definition
-                        string Question = $"What is {NumOne} x {NumTwo}?";
+                    Thread.Sleep(10); // Console stops for .01 seconds
+                    Console.Clear(); // Clears previous outputs
 
-                        // Printing to console
-                        Console.WriteLine(Question);
+                    // Score Keeper
+                    Console.WriteLine($"Current score: {Score}");
+                    // Question definition
+                    string Question = $"What is {NumOne} x {NumTwo}?";
 
-                        // User Input
-                        int UserAnswer;
+                    // Printing to console
+                    Console.WriteLine(Question);
 
-                        // checks user input for invalid information ~ non numeric data or out of range
-                        while (true)
+                    // User Input
+                    int UserAnswer;
+
+                    // checks user input for invalid information ~ non numeric data or out of range
+                    while (true)
+                    {
+                        try // checks if the user information is in the correct format, will loop until its correct
                         {
-                            try // checks if the user information is in the correct format, will loop until its correct
+                            UserAnswer = Convert.ToInt32(Console.ReadLine()); // Data required to be integer
+                            if (UserAnswer < 0 || UserAnswer > 100) // Data criteria
                             {
-                                UserAnswer = Convert.ToInt32(Console.ReadLine()); // Data required to be integer
-                                if (UserAnswer < 0 || UserAnswer > 100) // Data criteria
-                                {
-                                    Console.WriteLine(InvalidInput);
-                                }
+                                Console.WriteLine(InvalidInput);
+                            }
+                            else
+                            {
                                 break;
                             }
-                            catch (FormatException) // If data is not in the same format
-                            {
-                                Console.WriteLine(InvalidInput); // Outputs incorrect information entered
-                            }
                         }
-                        // Answer Check
-                        if (UserAnswer != Answer) // if not the same as answer
+                        catch (FormatException) // If data is not in the same format
                         {
-                            Console.WriteLine(Incorrect[rndString]); // Selects random string from array
+                            Console.WriteLine(InvalidInput); // Outputs incorrect information entered
                         }
-                        else if (UserAnswer == Answer) // if correct
-                        {
-                            Console.WriteLine(Correct[rndString]); // Selects random string from array
-                            Score++; // increments score by 1
-                        }
-                        i++; // increments question count by 1
-                        Thread.Sleep(1000); // console pauses for 1 second
-                        Console.Clear(); // clears previous outputs to console
                     }
-                    
-                    Console.WriteLine($"Well Done! You got {Score}/{i} correct!"); // Outputs Final score after all questions have been answer
+                    // Answer Check
+                    if (UserAnswer != Answer) // if not the same as answer
+                    {
+                        Console.WriteLine(Incorrect[rndString]); // Selects random string from array
+                    }
+                    else if (UserAnswer == Answer) // if correct
+                    {
+                        Console.WriteLine(Correct[rndString]); // Selects random string from array
+                        Score++; // increments score by 1
+                    }
+                    i++; // increments question count by 1
+                    Thread.Sleep(1000); // console pauses for 1 second
+                    Console.Clear(); // clears previous outputs to console
                 }
-                else if(UserDecision.ToUpper() == "N") // User decision will close the application if N is chosen at the beginning
-                {
-                    Console.Clear();
-                    ApplicationRunning = false;
-                } 
-                else //any input that isnt Y or N will output this prompt
-                {
-                    Console.WriteLine("Please enter Y or N as your decision.");
-                }
-                ApplicationRunning = false; // Closes the loop
+                Console.WriteLine($"Well Done! You got {Score}/{i} correct!"); // Outputs Final score after all questions have been answer
+                break;
             }
             // Provides 2.5 seconds before closing the console.
             Console.ReadLine();
-            Console.Clear(); 
+            Console.Clear();
         }
     }
 }
